@@ -1,0 +1,29 @@
+# Import necessary libraries
+import plotly.express as px
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import scipy.stats as pd
+
+Df=px.data.iris()
+Attribute='Sepal_length'
+print("1.Printing the first five records:")
+print(df.head())
+
+print("2.print the histogtram and kernal density estimation for the attribute 'sepal_length'")
+sns.histplot(df[attribute],kde=True)
+plt.title('Histogram and kde of sepal length')
+plt.xlabel('sepal length')
+plt.ylabel('Frequency')
+plt.show()
+
+print("3.print the prob")
+stats.probplot(df[attribute],dist='norm',plot=plt)
+plt.title('prob plot of sepal length')
+plt.show()
+
+skewness=df[attribute].skew()
+print(f"4.print the skewness of the attriute 'sepal length' \nskewness for sepal length={skewness}")
+
+pd.kurtosis=df[attribute].kurtosis()
+print(f"5.print the kurtosis of the attriute 'sepal length' \nkurtosis for sepal length={pd.kurtosis}")
