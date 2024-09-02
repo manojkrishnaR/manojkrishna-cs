@@ -1,0 +1,50 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import plotly.express as px
+from scipy.stats import norm
+
+# Load the dataset
+df = px.data.iris()
+
+# Define a function to perform the statistical analysis and plotting
+def analyze_and_plot(dataframe):
+    # List of numerical attributes
+    attributes = ['sepal_width', 'sepal_length', 'petal_width', 'petal_length']
+
+    for attribute in attributes:
+        # Count the total number of records
+        total_records = len(dataframe)
+        print(f"Total Number of Records for {attribute}: {total_records}")
+
+        # Compute mean and standard deviation
+        mean = dataframe[attribute].mean()
+        sd = dataframe[attribute].std()
+        print(f"Mean of {attribute}: {mean}")
+        print(f"Standard Deviation of {attribute}: {sd}")
+
+        # Plot Normal Distribution
+        plt.figure(figsize=(12, 6))
+        plt.subplot(1, 2, 1)
+        # Creating a range of values for normal distribution plot
+        x = np.linspace(dataframe[attribute].min() - 1, dataframe[attribute].max() + 1, 100)
+        # Compute the normal distribution
+        pdf = norm.pdf(x, mean, sd)
+        plt.plot(x, pdf, label=f'Normal Distribution\nMean: {mean:.2f}, SD: {sd:.2f}')
+        plt.title(f'Normal Distribution of {attribute}')
+        plt.xlabel(attribute)
+        plt.ylabel('Density')
+        plt.legend()
+
+        # Plot Histogram
+        plt.subplot(1, 2, 2)
+        plt.hist(dataframe[attribute], bins=20, edgecolor='k', alpha=0.7)
+        plt.title(f'Histogram of {attribute}')
+        plt.xlabel(attribute)
+        plt.ylabel('Frequency')
+
+        plt.tight_layout()
+        plt.show()
+
+# Execute the function
+analyze_and_plot(df)
